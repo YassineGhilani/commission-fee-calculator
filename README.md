@@ -1,7 +1,7 @@
 # Traditional Task + Refactoring Task
 [#Go To Tradidtional Task Documentation](#currency-transaction-fee-calculator)
+\
 [#Go To Refactoring Task](#exchange-rate--commission-calculator)
-
 
 # Currency Transaction Fee Calculator
 
@@ -93,7 +93,7 @@ This PHP project calculates the commission for transactions based on exchange ra
 ### Clone the repository:
    ```
    git clone https://github.com/YassineGhilani/commission-fee-calculator
-   cd commission-fee-calculator&
+   cd commission-fee-calculator
    ```
 
 ### Install dependencies:
@@ -104,23 +104,26 @@ This PHP project calculates the commission for transactions based on exchange ra
 
  - Run the script with a JSON Like text file containing transaction details:
 
+   ```
    cd src\RefactorExchangeRate
    php MainRefactor.php  ..\..\input.txt
+   ```
 
- - Example Input (data.json)
-
+ - Example Input (input.txt)
+   ```
    [
       {"bin": "45717360", "amount": 100.00, "currency": "USD"},
       {"bin": "516793", "amount": 50.00, "currency": "EUR"}
    ]
-
+   ```
  - Example Output
-
+   ```
    Commission: 1.85 | Converted Amount: 92.50 | Rate: 1.08
    Commission: 0.50 | Converted Amount: 50.00 | Rate: 1.00
-
+   ```
 ## Code Structure
 
+```
    src/RefactorExchangeRate/ExchangeRateService.php: Fetches exchange rates
 
    src/RefactorExchangeRate/BinCheckerService.php: Determines if a BIN is from the EU
@@ -130,6 +133,7 @@ This PHP project calculates the commission for transactions based on exchange ra
    src/RefactorExchangeRate/MainRefactor.php: Orchestrates the logic and processes transactions
 
    tests/RefactorExchangeRate/: Contains unit tests
+```
 
 ## Configuration
 
