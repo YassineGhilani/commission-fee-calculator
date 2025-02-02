@@ -11,7 +11,7 @@ use App\Refactor\CommissionCalculate;
 use App\Refactor\ExchangeRateService;
 use GuzzleHttp\Client;
 
-if(!isset($argv[1]) || !file_exists($argv[1])) {
+if (!isset($argv[1]) || !file_exists($argv[1])) {
     die("File not specified or not found!\n");
 }
 
@@ -19,11 +19,13 @@ $exchangeService = new ExchangeRateService("7VcJ3dntPvaPZ3frl4d6D38b9U4QLinS", n
 $binChecker = new BinCheckerService(new Client());
 $commissionCalculator = new CommissionCalculate();
 
-foreach(explode("\n", file_get_contents($argv[1])) as $row) {
-    if(empty($row)) continue;
+foreach (explode("\n", file_get_contents($argv[1])) as $row) {
+    if (empty($row)) {
+        continue;
+    }
 
     $rowData = json_decode($row, true);
-    if($rowData === null) {
+    if ($rowData === null) {
         echo "Decoding error for the line: $row\n";
         continue;
     }
@@ -31,13 +33,9 @@ foreach(explode("\n", file_get_contents($argv[1])) as $row) {
     $bin = $rowData['bin'];
     $amount = $rowData['amount'];
     $currency = $rowData['currency'];
-
     $isEu = $binChecker->isEu($bin);
     $rate = $exchangeService->getExchangeRate($currency, 'EUR');
     $amntFixed = ($currency === 'EUR' || $rate) ? $amount : $amount / $rate;
-
     $commission = $commissionCalculator->calculate($amntFixed, $isEu);
-
-    echo "Commission: $commission | Montant converti: $amntFixed | Taux: $rate\n";
-
+    echo "$commission \n";
 }

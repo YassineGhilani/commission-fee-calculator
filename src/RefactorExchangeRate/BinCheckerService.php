@@ -5,7 +5,8 @@ namespace App\Refactor;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\RequestException;
 
-class BinCheckerService{
+class BinCheckerService
+{
     private Client $httpClient;
 
     public function __construct(Client $httpClient)
@@ -24,7 +25,6 @@ class BinCheckerService{
         } catch (RequestException $e) {
             return false;
         }
-
     }
 
     private function getEuCountries(): array

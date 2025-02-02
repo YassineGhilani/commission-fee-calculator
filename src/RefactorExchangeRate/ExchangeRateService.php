@@ -7,7 +7,6 @@ use GuzzleHttp\Exception\RequestException;
 
 class ExchangeRateService
 {
-
     private string $apiKey;
     private Client $httpClient;
 
